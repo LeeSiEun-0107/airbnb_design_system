@@ -1,0 +1,22 @@
+function parse(qs){
+    const querystring=qs.substr(1); // querystring = 'banana=10&apple=20&orange=30'
+    const chunks = querystring.split('&'); // chunks = ['banana=10','apple=20','orange=30']
+    let result={};
+    //forEach를 사용하면 for문을 사용하지 않아도 된다.
+    chunks.forEach((chunk)=>{
+        const [key,value]=chunk.split('=');//key='banana',value='10'
+        result[key]=value;//result={ 'banana' : '10'}
+    });
+    return result
+}
+
+//const만 사용하려면 map 함수를 사용하면 된다
+function parse(qs){
+    const querystring=qs.substr(1); // querystring = 'banana=10&apple=20&orange=30'
+    const chunks = querystring.split('&'); // chunks = ['banana=10','apple=20','orange=30']
+    const result= chunks.map((chunk)=>{
+        const [key,value]=chunk.split('=');//key='banana',value='10'
+        return {key : key, value:value} 
+    }); //result=[{key:banana, value:10},{key:apple, value:20}, {key:orange, value:30} ]
+    return result
+}
